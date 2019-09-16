@@ -1,6 +1,5 @@
 import sqlite3
 
-
 class Student():
 
     def __init__(self, id, first, last, handle, cohort):
@@ -12,7 +11,6 @@ class Student():
 
     def __repr__(self):
         return f'{self.first_name} {self.last_name} is in {self.cohort}'
-
 
 class StudentExerciseReports():
 
@@ -124,13 +122,13 @@ class StudentExerciseReports():
         WHERE exercise_language = "C#"
                           """)
 
+# conditional to check the length of all csharp exercises
         all_csharp_exercises = db_cursor.fetchall()
-        for csharp in all_csharp_exercises:
-            if csharp not in all_csharp_exercises:
-                print("There are no C# exercises!")
-            else:
+        if len(all_csharp_exercises) == 0:
+            print("There are no C# exercises!")
+        else:
+            for csharp in all_csharp_exercises:
                 print(csharp)
-
 
     def all_students_cohorts(self):
         '''Retrieve all students and cohort names'''
@@ -168,10 +166,6 @@ class StudentExerciseReports():
         for instructorCohort in all_instructors_cohorts:
             print(instructorCohort)
 
-
-
-
-
 reports = StudentExerciseReports()
 reports.all_students()
 reports.all_cohorts()
@@ -181,5 +175,3 @@ reports.all_py_exercises()
 reports.all_csharp_exercises()
 reports.all_students_cohorts()
 reports.all_instructors_cohorts()
-# student = Student('Bart',8, 'Simpson', '@bart', 'Cohort 8')
-# print(f'{student.first_name} {student.last_name} is in {student.cohort}')
