@@ -112,6 +112,22 @@ class StudentExerciseReports():
         for python in all_py_exercises:
             print(python)
 
+    def all_csharp_exercises(self):
+        '''Retrieve all C# exercises'''
+        with sqlite3.connect(self.db_path) as conn:
+            db_cursor = conn.cursor()
+
+        db_cursor.execute("""
+        SELECT exercise_name,
+        exercise_language
+        FROM exercise
+        WHERE exercise_language = "C#"
+                          """)
+
+        all_csharp_exercises = db_cursor.fetchall()
+        for csharp in all_csharp_exercises:
+            print(csharp)
+
 
 
 
@@ -122,5 +138,6 @@ reports.all_cohorts()
 reports.all_exercises()
 reports.all_js_exercises()
 reports.all_py_exercises()
+reports.all_csharp_exercises()
 # student = Student('Bart',8, 'Simpson', '@bart', 'Cohort 8')
 # print(f'{student.first_name} {student.last_name} is in {student.cohort}')
