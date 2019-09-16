@@ -126,7 +126,11 @@ class StudentExerciseReports():
 
         all_csharp_exercises = db_cursor.fetchall()
         for csharp in all_csharp_exercises:
-            print(csharp)
+            if csharp not in all_csharp_exercises:
+                print("There are no C# exercises!")
+            else:
+                print(csharp)
+
 
     def all_students_cohorts(self):
         '''Retrieve all students and cohort names'''
