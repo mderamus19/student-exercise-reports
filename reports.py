@@ -128,6 +128,24 @@ class StudentExerciseReports():
         for csharp in all_csharp_exercises:
             print(csharp)
 
+    def all_students_cohorts(self):
+        '''Retrieve all students cohort names'''
+        with sqlite3.connect(self.db_path) as conn:
+            db_cursor = conn.cursor()
+
+        db_cursor.execute("""
+        SELECT first_name,
+        last_name,
+        c.Name
+        FROM Cohort c
+        JOIN student s
+        ON c.Id = s.student_cohort_Id
+                          """)
+
+        all_students_cohorts = db_cursor.fetchall()
+        for studentCohort in all_students_cohorts:
+            print(studentCohort)
+
 
 
 
@@ -139,5 +157,6 @@ reports.all_exercises()
 reports.all_js_exercises()
 reports.all_py_exercises()
 reports.all_csharp_exercises()
+reports.all_students_cohorts()
 # student = Student('Bart',8, 'Simpson', '@bart', 'Cohort 8')
 # print(f'{student.first_name} {student.last_name} is in {student.cohort}')
