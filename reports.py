@@ -51,7 +51,23 @@ class StudentExerciseReports():
 
             for student in all_students:
                 print(student)
+
+    def all_cohorts(self):
+        '''Retrieve all cohorts'''
+        with sqlite3.connect(self.db_path) as conn:
+            db_cursor = conn.cursor()
+
+        db_cursor.execute("""
+        SELECT c.Name
+        FROM Cohort c
+                          """)
+        all_cohorts = db_cursor.fetchall()
+        for cohort in all_cohorts:
+            print(cohort)
+
+
 reports = StudentExerciseReports()
 reports.all_students()
-student = Student('Bart',8, 'Simpson', '@bart', 'Cohort 8')
-print(f'{student.first_name} {student.last_name} is in {student.cohort}')
+reports.all_cohorts()
+# student = Student('Bart',8, 'Simpson', '@bart', 'Cohort 8')
+# print(f'{student.first_name} {student.last_name} is in {student.cohort}')
