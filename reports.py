@@ -129,7 +129,7 @@ class StudentExerciseReports():
             print(csharp)
 
     def all_students_cohorts(self):
-        '''Retrieve all students cohort names'''
+        '''Retrieve all students and cohort names'''
         with sqlite3.connect(self.db_path) as conn:
             db_cursor = conn.cursor()
 
@@ -146,6 +146,24 @@ class StudentExerciseReports():
         for studentCohort in all_students_cohorts:
             print(studentCohort)
 
+    def all_instructors_cohorts(self):
+        '''Retrieve all instructors and cohort names'''
+        with sqlite3.connect(self.db_path) as conn:
+            db_cursor = conn.cursor()
+
+        db_cursor.execute("""
+        SELECT first_name,
+        last_name,
+        c.Name
+        FROM Cohort c
+        JOIN instructor i
+        ON c.Id = i.instructor_cohort_Id
+                          """)
+
+        all_instructors_cohorts = db_cursor.fetchall()
+        for instructorCohort in all_instructors_cohorts:
+            print(instructorCohort)
+
 
 
 
@@ -158,5 +176,6 @@ reports.all_js_exercises()
 reports.all_py_exercises()
 reports.all_csharp_exercises()
 reports.all_students_cohorts()
+reports.all_instructors_cohorts()
 # student = Student('Bart',8, 'Simpson', '@bart', 'Cohort 8')
 # print(f'{student.first_name} {student.last_name} is in {student.cohort}')
