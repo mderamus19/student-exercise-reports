@@ -86,8 +86,10 @@ class StudentExerciseReports():
             db_cursor = conn.cursor()
 
         db_cursor.execute("""
-        SELECT exercise_name
+        SELECT exercise_name,
+        exercise_language
         FROM exercise
+        WHERE exercise_language = "Javascript"
                           """)
 
         all_js_exercises = db_cursor.fetchall()
