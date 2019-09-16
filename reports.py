@@ -65,9 +65,43 @@ class StudentExerciseReports():
         for cohort in all_cohorts:
             print(cohort)
 
+    def all_exercises(self):
+        '''Retrieve all exercises'''
+        with sqlite3.connect(self.db_path) as conn:
+            db_cursor = conn.cursor()
+
+        db_cursor.execute("""
+        SELECT exercise_name,
+        exercise_language
+        FROM exercise
+                          """)
+
+        all_exercises = db_cursor.fetchall()
+        for exercise in all_exercises:
+            print(exercise)
+
+    def all_js_exercises(self):
+        '''Retrieve all javascript exercises'''
+        with sqlite3.connect(self.db_path) as conn:
+            db_cursor = conn.cursor()
+
+        db_cursor.execute("""
+        SELECT exercise_name
+        FROM exercise
+                          """)
+
+        all_js_exercises = db_cursor.fetchall()
+        for javascript in all_js_exercises:
+            print(javascript)
+
+
+
+
 
 reports = StudentExerciseReports()
 reports.all_students()
 reports.all_cohorts()
+reports.all_exercises()
+reports.all_js_exercises()
 # student = Student('Bart',8, 'Simpson', '@bart', 'Cohort 8')
 # print(f'{student.first_name} {student.last_name} is in {student.cohort}')
