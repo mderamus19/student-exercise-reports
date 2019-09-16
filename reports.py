@@ -58,7 +58,7 @@ class Student_Cohort():
         self.cohort = cohort
 
     def __repr__(self):
-        return f'{self.first_name} {self.last_name}{self.cohort}'
+        return f'{self.first_name} {self.last_name } {self.cohort}'
 
 class Instructor_Cohort():
 
@@ -69,7 +69,7 @@ class Instructor_Cohort():
         self.cohort = cohort
 
     def __repr__(self):
-        return f'{self.first_name} {self.last_name} {self.cohort}'
+        return f'{self.first_name} {self.last_name } {self.cohort}'
 
 class StudentExerciseReports():
 
